@@ -1,0 +1,1307 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>F.Y.F football connection | ドイツサッカートライアル・エージェント</title>
+  <meta name="description" content="F.Y.F football connection は、ドイツサッカーチームへのトライアル・エージェントサービスです。渡航前サポートからトライアウト、現地生活まで一括サポート。">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700;900&family=Barlow+Condensed:wght@400;600;700;800&family=Barlow:wght@300;400;600&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --navy:     #0d1b2e;
+      --navy-mid: #1a2f4e;
+      --navy-light: #243c62;
+      --gold:     #c8a951;
+      --gold-light: #e0c272;
+      --white:    #ffffff;
+      --off-white:#f5f6f8;
+      --gray:     #e8eaed;
+      --gray-mid: #9ba3af;
+      --dark:     #0a0f17;
+      --text:     #2c3440;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Noto Sans JP', sans-serif;
+      color: var(--text);
+      background: var(--white);
+      overflow-x: hidden;
+    }
+
+    /* ========== TYPOGRAPHY ========== */
+    .en { font-family: 'Barlow Condensed', sans-serif; }
+    .en-light { font-family: 'Barlow', sans-serif; }
+
+    .section-label {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--gold);
+    }
+
+    .section-title-ja {
+      font-size: clamp(1.6rem, 3vw, 2.2rem);
+      font-weight: 700;
+      line-height: 1.4;
+      color: var(--navy);
+    }
+
+    .section-title-en {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: clamp(2.5rem, 5vw, 4rem);
+      font-weight: 800;
+      line-height: 1;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      color: var(--navy);
+    }
+
+    .lead {
+      font-size: 1rem;
+      line-height: 1.9;
+      color: #4a5568;
+    }
+
+    /* ========== HEADER / NAV ========== */
+    #header {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 1000;
+      background: transparent;
+      transition: background 0.4s, box-shadow 0.4s;
+      padding: 0 5%;
+      height: 72px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    #header.scrolled {
+      background: rgba(13, 27, 46, 0.97);
+      box-shadow: 0 2px 20px rgba(0,0,0,0.3);
+    }
+
+    .header-logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+    }
+
+    .header-logo img {
+      height: 44px;
+      width: auto;
+    }
+
+    nav.desktop-nav {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+    }
+
+    nav.desktop-nav a {
+      font-family: 'Barlow', sans-serif;
+      font-size: 0.85rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.85);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    nav.desktop-nav a:hover { color: var(--gold); }
+
+    .nav-cta {
+      background: var(--gold) !important;
+      color: var(--navy) !important;
+      padding: 8px 20px !important;
+      border-radius: 2px !important;
+      transition: background 0.2s !important;
+    }
+
+    .nav-cta:hover { background: var(--gold-light) !important; }
+
+    /* Hamburger */
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      justify-content: center;
+      gap: 5px;
+      width: 36px;
+      height: 36px;
+      cursor: pointer;
+      z-index: 1100;
+      background: none;
+      border: none;
+      padding: 0;
+    }
+
+    .hamburger span {
+      display: block;
+      height: 2px;
+      background: #fff;
+      border-radius: 2px;
+      transition: all 0.3s;
+      transform-origin: center;
+    }
+
+    .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .hamburger.open span:nth-child(2) { opacity: 0; }
+    .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+    /* Mobile nav overlay */
+    .mobile-nav {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(13, 27, 46, 0.98);
+      z-index: 999;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 2rem;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s;
+    }
+
+    .mobile-nav.open {
+      opacity: 1;
+      pointer-events: all;
+    }
+
+    .mobile-nav a {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 1.8rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: #fff;
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .mobile-nav a:hover { color: var(--gold); }
+
+    .mobile-nav .mobile-cta {
+      margin-top: 1rem;
+      background: var(--gold);
+      color: var(--navy) !important;
+      padding: 14px 36px;
+      border-radius: 2px;
+      font-size: 1.2rem !important;
+    }
+
+    /* ========== HERO ========== */
+    #hero {
+      position: relative;
+      height: 100svh;
+      min-height: 600px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      background: url('images/hero_bg.jpg') center/cover no-repeat;
+      transform: scale(1.05);
+      transition: transform 8s ease-out;
+    }
+
+    .hero-bg::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        135deg,
+        rgba(13,27,46,0.82) 0%,
+        rgba(13,27,46,0.55) 50%,
+        rgba(13,27,46,0.7) 100%
+      );
+    }
+
+    #hero.loaded .hero-bg { transform: scale(1); }
+
+    .hero-content {
+      position: relative;
+      z-index: 1;
+      text-align: center;
+      padding: 0 5%;
+      max-width: 900px;
+    }
+
+    .hero-label {
+      display: inline-block;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--gold);
+      border: 1px solid var(--gold);
+      padding: 6px 20px;
+      margin-bottom: 1.5rem;
+    }
+
+    .hero-title {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: clamp(3rem, 8vw, 7rem);
+      font-weight: 800;
+      line-height: 1.0;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      color: #fff;
+      margin-bottom: 0.5rem;
+    }
+
+    .hero-title span { color: var(--gold); }
+
+    .hero-subtitle {
+      font-size: clamp(1rem, 2vw, 1.25rem);
+      font-weight: 300;
+      color: rgba(255,255,255,0.85);
+      margin-bottom: 2.5rem;
+      letter-spacing: 0.05em;
+    }
+
+    .hero-catchcopy {
+      font-size: clamp(0.9rem, 1.5vw, 1.05rem);
+      font-weight: 400;
+      color: rgba(255,255,255,0.7);
+      margin-bottom: 2.5rem;
+      line-height: 1.8;
+    }
+
+    .hero-btn {
+      display: inline-block;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 1rem;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--navy);
+      background: var(--gold);
+      padding: 16px 48px;
+      text-decoration: none;
+      border-radius: 2px;
+      transition: background 0.2s, transform 0.2s;
+    }
+
+    .hero-btn:hover {
+      background: var(--gold-light);
+      transform: translateY(-2px);
+    }
+
+    .hero-scroll {
+      position: absolute;
+      bottom: 2.5rem;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      color: rgba(255,255,255,0.5);
+      font-family: 'Barlow', sans-serif;
+      font-size: 0.7rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      z-index: 1;
+    }
+
+    .hero-scroll::after {
+      content: '';
+      display: block;
+      width: 1px;
+      height: 40px;
+      background: rgba(255,255,255,0.4);
+      animation: scrollLine 2s ease-in-out infinite;
+    }
+
+    @keyframes scrollLine {
+      0%   { transform: scaleY(0); transform-origin: top; }
+      50%  { transform: scaleY(1); transform-origin: top; }
+      51%  { transform: scaleY(1); transform-origin: bottom; }
+      100% { transform: scaleY(0); transform-origin: bottom; }
+    }
+
+    /* ========== SECTION BASE ========== */
+    section { padding: 6rem 5%; }
+
+    .container {
+      max-width: 1140px;
+      margin: 0 auto;
+    }
+
+    .section-header {
+      margin-bottom: 3.5rem;
+    }
+
+    .section-header .section-label { display: block; margin-bottom: 0.5rem; }
+
+    /* Divider line */
+    .divider {
+      width: 48px;
+      height: 3px;
+      background: var(--gold);
+      margin: 1rem 0 1.5rem;
+    }
+
+    /* ========== 2-COLUMN LAYOUT ========== */
+    .two-col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: center;
+    }
+
+    .two-col.reverse { direction: rtl; }
+    .two-col.reverse > * { direction: ltr; }
+
+    .col-image {
+      position: relative;
+      overflow: hidden;
+      border-radius: 4px;
+    }
+
+    .col-image img {
+      width: 100%;
+      height: 420px;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.6s ease;
+    }
+
+    .col-image:hover img { transform: scale(1.04); }
+
+    .col-image::before {
+      content: '';
+      position: absolute;
+      inset: 12px 12px -12px -12px;
+      border: 2px solid var(--gold);
+      border-radius: 4px;
+      z-index: -1;
+    }
+
+    .col-text { }
+    .col-text p { color: #4a5568; line-height: 1.9; margin-top: 1.2rem; }
+
+    /* ========== ご挨拶 ========== */
+    #greeting { background: var(--white); }
+
+    /* ========== サービス概要 ========== */
+    #service { background: var(--navy); }
+    #service .section-label { color: var(--gold); }
+    #service .section-title-en { color: #fff; }
+    #service .section-title-ja { color: #fff; }
+    #service .col-text p { color: rgba(255,255,255,0.75); }
+    #service .divider { background: var(--gold); }
+
+    .service-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-top: 1.5rem;
+    }
+
+    .tag {
+      font-family: 'Barlow', sans-serif;
+      font-size: 0.78rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--gold);
+      border: 1px solid rgba(200,169,81,0.5);
+      padding: 5px 14px;
+      border-radius: 2px;
+    }
+
+    /* ========== サポート内容 ========== */
+    #support { background: var(--off-white); }
+
+    .support-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+      margin-top: 3rem;
+    }
+
+    .support-card {
+      background: #fff;
+      border-radius: 6px;
+      overflow: hidden;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.07);
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    .support-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 12px 40px rgba(0,0,0,0.12);
+    }
+
+    .support-card-img {
+      width: 100%;
+      height: 220px;
+      object-fit: cover;
+      display: block;
+    }
+
+    .support-card-body {
+      padding: 1.8rem;
+    }
+
+    .support-card-num {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 0.3rem;
+    }
+
+    .support-card-title {
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--navy);
+      margin-bottom: 1rem;
+    }
+
+    .support-card-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .support-card-list li {
+      font-size: 0.9rem;
+      color: #4a5568;
+      padding-left: 1.2rem;
+      position: relative;
+    }
+
+    .support-card-list li::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0.6em;
+      width: 6px;
+      height: 6px;
+      background: var(--gold);
+      border-radius: 50%;
+    }
+
+    /* ========== FLOW ========== */
+    #flow { background: var(--navy); }
+    #flow .section-label { color: var(--gold); }
+    #flow .section-title-en { color: #fff; }
+    #flow .section-title-ja { color: #fff; }
+    #flow .divider { background: var(--gold); }
+
+    .flow-steps {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      margin-top: 3rem;
+      position: relative;
+    }
+
+    .flow-steps::before {
+      content: '';
+      position: absolute;
+      left: 28px;
+      top: 0; bottom: 0;
+      width: 2px;
+      background: rgba(200,169,81,0.3);
+    }
+
+    .flow-step {
+      display: flex;
+      gap: 2rem;
+      align-items: flex-start;
+      padding: 1.8rem 0;
+      position: relative;
+    }
+
+    .flow-step:not(:last-child)::after {
+      content: '';
+      position: absolute;
+      left: 28px;
+      bottom: 0;
+      width: 2px;
+      height: 1.8rem;
+      background: rgba(200,169,81,0.3);
+    }
+
+    .flow-num {
+      flex-shrink: 0;
+      width: 56px;
+      height: 56px;
+      background: var(--gold);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 1.3rem;
+      font-weight: 800;
+      color: var(--navy);
+      position: relative;
+      z-index: 1;
+    }
+
+    .flow-content { padding-top: 0.3rem; }
+
+    .flow-title {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 0.4rem;
+    }
+
+    .flow-desc {
+      font-size: 0.9rem;
+      color: rgba(255,255,255,0.65);
+      line-height: 1.7;
+    }
+
+    /* ========== 海外遠征 ========== */
+    #expedition { background: var(--white); }
+
+    .expedition-features {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1rem;
+      margin-top: 1.5rem;
+    }
+
+    .expedition-feature {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.8rem;
+      padding: 1rem;
+      background: var(--off-white);
+      border-radius: 4px;
+    }
+
+    .expedition-feature-icon {
+      flex-shrink: 0;
+      width: 32px;
+      height: 32px;
+      background: var(--navy);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .expedition-feature-icon svg {
+      width: 16px;
+      height: 16px;
+      fill: var(--gold);
+    }
+
+    .expedition-feature p {
+      font-size: 0.88rem;
+      color: var(--text);
+      line-height: 1.6;
+      margin: 0 !important;
+    }
+
+    /* Expedition flow (horizontal) */
+    .expedition-flow {
+      display: flex;
+      gap: 0;
+      margin-top: 4rem;
+      position: relative;
+    }
+
+    .expedition-flow::before {
+      content: '';
+      position: absolute;
+      top: 28px;
+      left: calc(14% / 2);
+      right: calc(14% / 2);
+      height: 2px;
+      background: var(--gold);
+      z-index: 0;
+    }
+
+    .exp-step {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1rem;
+      text-align: center;
+      position: relative;
+    }
+
+    .exp-step-num {
+      width: 56px;
+      height: 56px;
+      background: var(--navy);
+      border: 2px solid var(--gold);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 1.3rem;
+      font-weight: 800;
+      color: var(--gold);
+      position: relative;
+      z-index: 1;
+    }
+
+    .exp-step-title {
+      font-size: 0.88rem;
+      font-weight: 700;
+      color: var(--navy);
+      line-height: 1.5;
+    }
+
+    /* ========== サービス概要テーブル ========== */
+    #overview { background: var(--off-white); }
+
+    .overview-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 2rem;
+      background: #fff;
+      border-radius: 6px;
+      overflow: hidden;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+    }
+
+    .overview-table th,
+    .overview-table td {
+      padding: 1.2rem 1.5rem;
+      text-align: left;
+      font-size: 0.95rem;
+      border-bottom: 1px solid var(--gray);
+    }
+
+    .overview-table th {
+      width: 200px;
+      background: var(--navy);
+      color: #fff;
+      font-weight: 500;
+    }
+
+    .overview-table td { color: var(--text); }
+
+    .overview-table tr:last-child th,
+    .overview-table tr:last-child td { border-bottom: none; }
+
+    /* ========== お問い合わせ ========== */
+    #contact { background: var(--dark); }
+    #contact .section-label { color: var(--gold); }
+    #contact .section-title-en { color: #fff; }
+    #contact .section-title-ja { color: #fff; }
+    #contact .divider { background: var(--gold); }
+    #contact .lead { color: rgba(255,255,255,0.7); }
+
+    .contact-box {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      gap: 2rem;
+      padding: 4rem 2rem;
+      background: linear-gradient(135deg, var(--navy-mid), var(--navy));
+      border-radius: 8px;
+      border: 1px solid rgba(200,169,81,0.3);
+      margin-top: 3rem;
+    }
+
+    .contact-box p {
+      color: rgba(255,255,255,0.75);
+      font-size: 1rem;
+      line-height: 1.9;
+      max-width: 560px;
+    }
+
+    .instagram-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);
+      color: #fff;
+      text-decoration: none;
+      padding: 16px 40px;
+      border-radius: 4px;
+      font-family: 'Barlow', sans-serif;
+      font-size: 1rem;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      transition: opacity 0.2s, transform 0.2s;
+    }
+
+    .instagram-btn:hover {
+      opacity: 0.9;
+      transform: translateY(-2px);
+    }
+
+    .instagram-btn svg {
+      width: 22px;
+      height: 22px;
+      fill: #fff;
+    }
+
+    .contact-note {
+      font-size: 0.83rem;
+      color: rgba(255,255,255,0.45) !important;
+    }
+
+    /* ========== FOOTER ========== */
+    footer {
+      background: var(--dark);
+      border-top: 1px solid rgba(255,255,255,0.08);
+      padding: 3rem 5% 2rem;
+    }
+
+    .footer-inner {
+      max-width: 1140px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1.5rem;
+      text-align: center;
+    }
+
+    .footer-logo img {
+      height: 52px;
+      width: auto;
+      opacity: 0.9;
+    }
+
+    .footer-nav {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 1.5rem;
+    }
+
+    .footer-nav a {
+      font-family: 'Barlow', sans-serif;
+      font-size: 0.78rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.45);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .footer-nav a:hover { color: var(--gold); }
+
+    .footer-copy {
+      font-size: 0.75rem;
+      color: rgba(255,255,255,0.25);
+    }
+
+    /* ========== SCROLL ANIMATIONS ========== */
+    .reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .reveal-delay-1 { transition-delay: 0.1s; }
+    .reveal-delay-2 { transition-delay: 0.2s; }
+    .reveal-delay-3 { transition-delay: 0.3s; }
+
+    /* ========== RESPONSIVE ========== */
+    @media (max-width: 900px) {
+      nav.desktop-nav { display: none; }
+      .hamburger { display: flex; }
+      .mobile-nav { display: flex; }
+
+      .two-col {
+        grid-template-columns: 1fr;
+        gap: 2.5rem;
+      }
+      .two-col.reverse { direction: ltr; }
+
+      .col-image img { height: 280px; }
+      .col-image::before { display: none; }
+
+      .support-grid { grid-template-columns: 1fr; }
+
+      .expedition-flow { flex-direction: column; gap: 1.5rem; }
+      .expedition-flow::before { display: none; }
+      .exp-step { flex-direction: row; text-align: left; }
+
+      .expedition-features { grid-template-columns: 1fr; }
+
+      .overview-table th { width: 130px; }
+
+      .flow-steps::before { left: 24px; }
+      .flow-num { width: 48px; height: 48px; font-size: 1.1rem; }
+    }
+
+    @media (max-width: 600px) {
+      section { padding: 4rem 5%; }
+      .hero-title { font-size: 2.8rem; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ========== HEADER ========== -->
+<header id="header">
+  <a href="#hero" class="header-logo">
+    <img src="images/logo_main.png" alt="F.Y.F football connection">
+  </a>
+
+  <nav class="desktop-nav">
+    <a href="#greeting">ご挨拶</a>
+    <a href="#service">サービス</a>
+    <a href="#support">サポート内容</a>
+    <a href="#flow">ご利用の流れ</a>
+    <a href="#expedition">海外遠征</a>
+    <a href="#contact" class="nav-cta">お問い合わせ</a>
+  </nav>
+
+  <button class="hamburger" id="hamburger" aria-label="メニュー">
+    <span></span><span></span><span></span>
+  </button>
+</header>
+
+<!-- Mobile Nav -->
+<nav class="mobile-nav" id="mobileNav">
+  <a href="#greeting"   onclick="closeMenu()">ご挨拶</a>
+  <a href="#service"    onclick="closeMenu()">サービス</a>
+  <a href="#support"    onclick="closeMenu()">サポート内容</a>
+  <a href="#flow"       onclick="closeMenu()">ご利用の流れ</a>
+  <a href="#expedition" onclick="closeMenu()">海外遠征</a>
+  <a href="#overview"   onclick="closeMenu()">サービス概要</a>
+  <a href="#contact" class="mobile-cta" onclick="closeMenu()">お問い合わせ</a>
+</nav>
+
+<!-- ========== HERO ========== -->
+<section id="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-content">
+    <span class="hero-label">Germany Football Trial Agent</span>
+    <h1 class="hero-title">F.Y.F<br><span>football</span><br>connection</h1>
+    <p class="hero-subtitle">for your future</p>
+    <p class="hero-catchcopy">
+      夢のドイツサッカーへ、ともに踏み出す一歩。<br>
+      渡航準備からトライアウト、現地生活まで完全サポート。
+    </p>
+    <a href="#contact" class="hero-btn">無料相談はこちら</a>
+  </div>
+  <div class="hero-scroll">Scroll</div>
+</section>
+
+<!-- ========== ご挨拶 ========== -->
+<section id="greeting">
+  <div class="container">
+    <div class="two-col">
+      <div class="col-image reveal">
+        <img src="images/greeting_stadium.jpg" alt="ドイツのサッカースタジアム">
+      </div>
+      <div class="col-text reveal reveal-delay-2">
+        <span class="section-label">Greeting</span>
+        <div class="divider"></div>
+        <h2 class="section-title-ja">日本のサッカー選手に、<br>世界への扉を。</h2>
+        <p>
+          F.Y.F football connection は、日本のサッカー選手がドイツのクラブチームでトライアルを受けるための、あらゆるサポートを提供するエージェントサービスです。
+        </p>
+        <p>
+          「for your future（あなたの未来のために）」という名の通り、選手一人ひとりの可能性を最大限に引き出すべく、渡航前の準備から現地での生活まで、経験豊富なスタッフが徹底的にサポートします。
+        </p>
+        <p>
+          初めての海外挑戦でも、安心して最高のパフォーマンスを発揮できる環境を整えることが私たちの使命です。
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== サービス内容のご紹介 ========== -->
+<section id="service">
+  <div class="container">
+    <div class="two-col reverse">
+      <div class="col-image reveal">
+        <img src="images/tryout_match.jpg" alt="ドイツでのトライアウト">
+      </div>
+      <div class="col-text reveal reveal-delay-2">
+        <span class="section-label">Our Service</span>
+        <div class="divider"></div>
+        <h2 class="section-title-en" style="color:#fff;">What We<br>Offer</h2>
+        <h3 class="section-title-ja" style="margin-top:0.8rem;">ドイツサッカー挑戦を<br>トータルサポート</h3>
+        <p>
+          チーム選定から始まり、VISA取得サポート・語学学習・現地お出迎えまで、渡航前から帰国後まで一貫してサポートします。選手がフィールドに集中できる環境づくりが私たちの強みです。
+        </p>
+        <div class="service-tags">
+          <span class="tag">Trial Agent</span>
+          <span class="tag">Visa Support</span>
+          <span class="tag">Training Support</span>
+          <span class="tag">Life Support</span>
+          <span class="tag">Contract Negotiation</span>
+          <span class="tag">Team Expedition</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== サポート内容 ========== -->
+<section id="support">
+  <div class="container">
+    <div class="section-header reveal">
+      <span class="section-label">Support</span>
+      <div class="divider"></div>
+      <h2 class="section-title-en">Support Details</h2>
+      <p class="section-title-ja" style="margin-top:0.5rem;">3つのサポートで選手を守る</p>
+    </div>
+
+    <div class="support-grid">
+
+      <!-- ① 渡航前サポート -->
+      <div class="support-card reveal">
+        <img src="images/support_visa.jpg" alt="VISA・パスポート" class="support-card-img">
+        <div class="support-card-body">
+          <div class="support-card-num">Support 01</div>
+          <h3 class="support-card-title">渡航前サポート</h3>
+          <ul class="support-card-list">
+            <li>VISA取得に必要な書類の説明・取得サポート</li>
+            <li>希望者への語学学習サポート</li>
+            <li>現地到着時のお出迎え対応</li>
+            <li>渡航に必要な各種手続きのアドバイス</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- ② トライアウトサポート -->
+      <div class="support-card reveal reveal-delay-1">
+        <img src="images/tryout_germany.jpg" alt="トライアウト" class="support-card-img">
+        <div class="support-card-body">
+          <div class="support-card-num">Support 02</div>
+          <h3 class="support-card-title">トライアウトサポート</h3>
+          <ul class="support-card-list">
+            <li>希望・実力に合わせたチーム選定サポート</li>
+            <li>トライアウトに向けた現地トレーニング調整</li>
+            <li>コンディション管理・メンタルサポート</li>
+            <li>契約交渉および契約後のフォロー</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- ③ 現地生活サポート -->
+      <div class="support-card reveal reveal-delay-2">
+        <img src="images/life_clubhouse.jpg" alt="現地生活サポート" class="support-card-img">
+        <div class="support-card-body">
+          <div class="support-card-num">Support 03</div>
+          <h3 class="support-card-title">現地生活サポート</h3>
+          <ul class="support-card-list">
+            <li>スーパー・食事に関するアドバイス</li>
+            <li>移動・交通手段のサポート</li>
+            <li>電気・水道など生活インフラのサポート</li>
+            <li>日常生活での困りごとへの対応</li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ========== ご利用の流れ ========== -->
+<section id="flow">
+  <div class="container">
+    <div class="section-header reveal">
+      <span class="section-label">Process</span>
+      <div class="divider"></div>
+      <h2 class="section-title-en">How It Works</h2>
+      <p class="section-title-ja" style="margin-top:0.5rem;">エージェントサポートご利用の流れ</p>
+    </div>
+
+    <div class="flow-steps">
+
+      <div class="flow-step reveal">
+        <div class="flow-num">1</div>
+        <div class="flow-content">
+          <div class="flow-title">無料相談・ヒアリング</div>
+          <div class="flow-desc">まずはお気軽にDMでご相談ください。選手の経歴・目標・希望条件などを丁寧にヒアリングします。</div>
+        </div>
+      </div>
+
+      <div class="flow-step reveal reveal-delay-1">
+        <div class="flow-num">2</div>
+        <div class="flow-content">
+          <div class="flow-title">チーム選定・プラン提案</div>
+          <div class="flow-desc">選手のレベルと希望に合ったドイツのクラブチームを選定し、最適なトライアルプランをご提案します。</div>
+        </div>
+      </div>
+
+      <div class="flow-step reveal reveal-delay-2">
+        <div class="flow-num">3</div>
+        <div class="flow-content">
+          <div class="flow-title">渡航準備サポート</div>
+          <div class="flow-desc">VISA取得・書類準備・語学学習など、ドイツへの渡航に向けて必要な準備を全面サポートします。</div>
+        </div>
+      </div>
+
+      <div class="flow-step reveal">
+        <div class="flow-num">4</div>
+        <div class="flow-content">
+          <div class="flow-title">現地到着・コンディション調整</div>
+          <div class="flow-desc">現地にてお出迎え。トライアウト本番に向けてトレーニング・コンディション・生活環境を整えます。</div>
+        </div>
+      </div>
+
+      <div class="flow-step reveal reveal-delay-1">
+        <div class="flow-num">5</div>
+        <div class="flow-content">
+          <div class="flow-title">トライアウト</div>
+          <div class="flow-desc">選手が最高のパフォーマンスを発揮できるよう、当日のサポートも万全の体制で臨みます。</div>
+        </div>
+      </div>
+
+      <div class="flow-step reveal reveal-delay-2">
+        <div class="flow-num">6</div>
+        <div class="flow-content">
+          <div class="flow-title">契約交渉・契約後サポート</div>
+          <div class="flow-desc">契約交渉から締結後のフォローまで、選手が安心して新生活をスタートできるよう継続サポートします。</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ========== チームでの海外遠征 ========== -->
+<section id="expedition">
+  <div class="container">
+    <div class="two-col">
+      <div class="col-image reveal">
+        <img src="images/expedition_team.jpg" alt="チーム海外遠征">
+      </div>
+      <div class="col-text reveal reveal-delay-2">
+        <span class="section-label">Team Expedition</span>
+        <div class="divider"></div>
+        <h2 class="section-title-en">Overseas<br>Expedition</h2>
+        <h3 class="section-title-ja" style="margin-top:0.8rem;">チームでの<br>海外遠征をお考えの方へ</h3>
+        <p>
+          部活動やクラブチームでのドイツ遠征も、F.Y.F football connection が一括サポートします。初めての海外遠征でも安心の運営体制で、競技力向上と国際経験を同時に実現します。
+        </p>
+
+        <div class="expedition-features">
+          <div class="expedition-feature">
+            <div class="expedition-feature-icon">
+              <svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/></svg>
+            </div>
+            <p>海外チームとの実戦経験</p>
+          </div>
+          <div class="expedition-feature">
+            <div class="expedition-feature-icon">
+              <svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/></svg>
+            </div>
+            <p>競技力向上 × 国際経験</p>
+          </div>
+          <div class="expedition-feature">
+            <div class="expedition-feature-icon">
+              <svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/></svg>
+            </div>
+            <p>遠征準備〜現地対応まで一括</p>
+          </div>
+          <div class="expedition-feature">
+            <div class="expedition-feature-icon">
+              <svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/></svg>
+            </div>
+            <p>チーム目的に合わせた<br>オーダーメイド遠征</p>
+          </div>
+          <div class="expedition-feature">
+            <div class="expedition-feature-icon">
+              <svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/></svg>
+            </div>
+            <p>安全面・生活面・移動面まで対応</p>
+          </div>
+          <div class="expedition-feature">
+            <div class="expedition-feature-icon">
+              <svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/></svg>
+            </div>
+            <p>監督・引率者の負担を軽減</p>
+          </div>
+        </div>
+
+        <div class="expedition-flow reveal reveal-delay-1">
+          <div class="exp-step">
+            <div class="exp-step-num">1</div>
+            <div class="exp-step-title">無料相談<br>ヒアリング</div>
+          </div>
+          <div class="exp-step">
+            <div class="exp-step-num">2</div>
+            <div class="exp-step-title">プラン提案<br>準備開始</div>
+          </div>
+          <div class="exp-step">
+            <div class="exp-step-num">3</div>
+            <div class="exp-step-title">渡航<br>現地サポート</div>
+          </div>
+          <div class="exp-step">
+            <div class="exp-step-num">4</div>
+            <div class="exp-step-title">遠征実施<br>帰国フォロー</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== サービス概要 ========== -->
+<section id="overview">
+  <div class="container">
+    <div class="section-header reveal">
+      <span class="section-label">Overview</span>
+      <div class="divider"></div>
+      <h2 class="section-title-en">Service Overview</h2>
+      <p class="section-title-ja" style="margin-top:0.5rem;">サービス概要</p>
+    </div>
+
+    <table class="overview-table reveal">
+      <tr>
+        <th>事業名</th>
+        <td>F.Y.F football connection</td>
+      </tr>
+      <tr>
+        <th>サービス内容</th>
+        <td>ドイツサッカーチームへのトライアル・エージェントサービス／チームでの海外遠征サポート</td>
+      </tr>
+      <tr>
+        <th>対象</th>
+        <td>ドイツのクラブチームでトライアルを希望する選手／海外遠征を検討しているチーム（部活動・クラブなど）</td>
+      </tr>
+      <tr>
+        <th>主なサポート</th>
+        <td>渡航前サポート（VISA・書類・語学）／トライアウトサポート（チーム選定・トレーニング・契約交渉）／現地生活サポート（食事・交通・インフラ）</td>
+      </tr>
+      <tr>
+        <th>相談方法</th>
+        <td>Instagram DMにてお問い合わせください（初回相談無料）</td>
+      </tr>
+      <tr>
+        <th>Instagram</th>
+        <td><a href="https://www.instagram.com/fyf.connection2022/" target="_blank" rel="noopener" style="color:var(--navy);font-weight:600;">@fyf.connection2022</a></td>
+      </tr>
+    </table>
+  </div>
+</section>
+
+<!-- ========== お問い合わせ ========== -->
+<section id="contact">
+  <div class="container">
+    <div class="section-header reveal" style="text-align:center;">
+      <span class="section-label">Contact</span>
+      <div class="divider" style="margin:1rem auto 1.5rem;"></div>
+      <h2 class="section-title-en" style="color:#fff;">Get In Touch</h2>
+      <p class="section-title-ja" style="margin-top:0.5rem;color:#fff;">お問い合わせ</p>
+    </div>
+
+    <div class="contact-box reveal">
+      <p>
+        ドイツでのトライアルに興味がある方、海外遠征を検討しているチームの方、<br>
+        まずはお気軽にInstagramのDMからご相談ください。<br>
+        初回相談は無料です。
+      </p>
+
+      <a href="https://www.instagram.com/fyf.connection2022/" target="_blank" rel="noopener" class="instagram-btn">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+        </svg>
+        Instagram DMでお問い合わせ
+      </a>
+
+      <p class="contact-note">
+        ※ お返事まで数日かかる場合がございます。あらかじめご了承ください。
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ========== FOOTER ========== -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-logo">
+      <img src="images/logo_main.png" alt="F.Y.F football connection">
+    </div>
+    <nav class="footer-nav">
+      <a href="#greeting">ご挨拶</a>
+      <a href="#service">サービス</a>
+      <a href="#support">サポート内容</a>
+      <a href="#flow">ご利用の流れ</a>
+      <a href="#expedition">海外遠征</a>
+      <a href="#overview">サービス概要</a>
+      <a href="#contact">お問い合わせ</a>
+    </nav>
+    <p class="footer-copy">&copy; 2024 F.Y.F football connection. All rights reserved.</p>
+  </div>
+</footer>
+
+<!-- ========== SCRIPTS ========== -->
+<script>
+  // Header scroll effect
+  const header = document.getElementById('header');
+  window.addEventListener('scroll', () => {
+    header.classList.toggle('scrolled', window.scrollY > 60);
+  });
+
+  // Hero bg zoom on load
+  window.addEventListener('load', () => {
+    document.getElementById('hero').classList.add('loaded');
+  });
+
+  // Hamburger menu
+  const hamburger = document.getElementById('hamburger');
+  const mobileNav = document.getElementById('mobileNav');
+
+  hamburger.addEventListener('click', () => {
+    hamburger.classList.toggle('open');
+    mobileNav.classList.toggle('open');
+    document.body.style.overflow = mobileNav.classList.contains('open') ? 'hidden' : '';
+  });
+
+  function closeMenu() {
+    hamburger.classList.remove('open');
+    mobileNav.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  // Scroll reveal
+  const revealEls = document.querySelectorAll('.reveal');
+  const revealObs = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        revealObs.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+
+  revealEls.forEach(el => revealObs.observe(el));
+</script>
+
+</body>
+</html>

@@ -1,0 +1,11 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(gh auth *)",
+      "Bash(curl -s https://api.github.com/user)",
+      "Bash(git --version)",
+      "Bash(brew install *)",
+      "Bash(/opt/homebrew/bin/brew install *)"
+    ]
+  }
+}
