@@ -97,7 +97,7 @@
     }
 
     .header-logo img {
-      height: 44px;
+      height: 64px;
       width: auto;
     }
 
@@ -769,8 +769,8 @@
 
     /* ========== FOOTER ========== */
     footer {
-      background: var(--dark);
-      border-top: 1px solid rgba(255,255,255,0.08);
+      background: #e8eaed;
+      border-top: 1px solid #d0d3d8;
       padding: 3rem 5% 2rem;
     }
 
@@ -785,7 +785,7 @@
     }
 
     .footer-logo img {
-      height: 52px;
+      height: 100px;
       width: auto;
       opacity: 0.9;
     }
@@ -803,16 +803,16 @@
       font-weight: 600;
       letter-spacing: 0.1em;
       text-transform: uppercase;
-      color: rgba(255,255,255,0.45);
+      color: #6b7280;
       text-decoration: none;
       transition: color 0.2s;
     }
 
-    .footer-nav a:hover { color: var(--gold); }
+    .footer-nav a:hover { color: var(--navy); }
 
     .footer-copy {
       font-size: 0.75rem;
-      color: rgba(255,255,255,0.25);
+      color: #9ba3af;
     }
 
     /* ========== SCROLL ANIMATIONS ========== */
@@ -848,8 +848,23 @@
 
       .support-grid { grid-template-columns: 1fr; }
 
-      .expedition-flow { flex-direction: column; gap: 1.5rem; }
+      .expedition-flow { flex-direction: column; gap: 0; }
       .expedition-flow::before { display: none; }
+      .exp-step { flex-direction: row; text-align: left; padding: 0; gap: 1.2rem; }
+      .exp-step { position: relative; padding: 0 0 1.5rem 0; }
+      .exp-step:last-child { padding-bottom: 0; }
+      .exp-step::after {
+        content: '';
+        position: absolute;
+        left: 27px;
+        top: 56px;
+        bottom: 0;
+        width: 2px;
+        background: var(--gold);
+      }
+      .exp-step:last-child::after { display: none; }
+      .exp-step-num { flex-shrink: 0; position: relative; z-index: 1; }
+      .exp-step-title { padding-top: 0.8rem; }
       .exp-step { flex-direction: row; text-align: left; }
 
       .expedition-features { grid-template-columns: 1fr; }
@@ -871,7 +886,7 @@
 <!-- ========== HEADER ========== -->
 <header id="header">
   <a href="#hero" class="header-logo">
-    <img src="images/logo_main.png" alt="F.Y.F football connection">
+    <img src="images/logo_bg.png" alt="F.Y.F football connection">
   </a>
 
   <nav class="desktop-nav">
@@ -920,7 +935,7 @@
   <div class="container">
     <div class="two-col">
       <div class="col-image reveal">
-        <img src="images/greeting_stadium.jpg" alt="ドイツのサッカースタジアム">
+        <img src="images/schalke_kids.png" alt="ドイツでプレーする選手たち">
       </div>
       <div class="col-text reveal reveal-delay-2">
         <span class="section-label">Greeting</span>
@@ -1200,7 +1215,7 @@
       </tr>
       <tr>
         <th>相談方法</th>
-        <td>Instagram DMにてお問い合わせください（初回相談無料）</td>
+        <td>Instagram DMにてお問い合わせください</td>
       </tr>
       <tr>
         <th>Instagram</th>
@@ -1223,8 +1238,7 @@
     <div class="contact-box reveal">
       <p>
         ドイツでのトライアルに興味がある方、海外遠征を検討しているチームの方、<br>
-        まずはお気軽にInstagramのDMからご相談ください。<br>
-        初回相談は無料です。
+        まずはお気軽にInstagramのDMからご相談ください。
       </p>
 
       <a href="https://www.instagram.com/fyf.connection2022/" target="_blank" rel="noopener" class="instagram-btn">
