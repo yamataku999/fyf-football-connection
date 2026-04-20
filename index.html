@@ -163,42 +163,96 @@
       display: none;
       position: fixed;
       inset: 0;
-      background: rgba(13, 27, 46, 0.98);
+      background: var(--navy);
       z-index: 999;
       flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      gap: 2rem;
+      justify-content: space-between;
+      padding: 100px 10% 60px;
       opacity: 0;
       pointer-events: none;
-      transition: opacity 0.3s;
+      transform: translateX(100%);
+      transition: opacity 0.4s ease, transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
     }
 
     .mobile-nav.open {
       opacity: 1;
       pointer-events: all;
+      transform: translateX(0);
     }
 
-    .mobile-nav a {
+    .mobile-nav-links {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+
+    .mobile-nav a.menu-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
       font-family: 'Barlow Condensed', sans-serif;
-      font-size: 1.8rem;
+      font-size: 2rem;
       font-weight: 700;
-      letter-spacing: 0.1em;
+      letter-spacing: 0.08em;
       text-transform: uppercase;
-      color: #fff;
+      color: rgba(255,255,255,0.85);
       text-decoration: none;
-      transition: color 0.2s;
+      padding: 1.1rem 0;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      transition: color 0.2s, padding-left 0.2s;
+      position: relative;
     }
 
-    .mobile-nav a:hover { color: var(--gold); }
+    .mobile-nav a.menu-item::after {
+      content: '→';
+      font-size: 1rem;
+      color: var(--gold);
+      opacity: 0;
+      transition: opacity 0.2s, transform 0.2s;
+      transform: translateX(-8px);
+    }
+
+    .mobile-nav a.menu-item:hover {
+      color: #fff;
+      padding-left: 0.5rem;
+    }
+
+    .mobile-nav a.menu-item:hover::after {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    .mobile-nav-bottom {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
 
     .mobile-nav .mobile-cta {
-      margin-top: 1rem;
+      display: block;
+      text-align: center;
       background: var(--gold);
       color: var(--navy) !important;
-      padding: 14px 36px;
+      padding: 18px 0;
       border-radius: 2px;
-      font-size: 1.2rem !important;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 1.1rem !important;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      text-decoration: none;
+      transition: background 0.2s;
+    }
+
+    .mobile-nav .mobile-cta:hover { background: var(--gold-light); }
+
+    .mobile-nav-logo {
+      height: 36px;
+      width: auto;
+      max-width: 160px;
+      object-fit: contain;
+      filter: invert(1) brightness(2);
+      opacity: 0.35;
     }
 
     /* ========== HERO ========== */
@@ -491,6 +545,137 @@
       color: #4a5568;
       padding-left: 1.2rem;
       position: relative;
+    }
+
+    .support-card-more {
+      margin-top: 1.2rem;
+      font-family: 'Barlow', sans-serif;
+      font-size: 0.82rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      color: var(--gold);
+      transition: letter-spacing 0.2s;
+    }
+
+    a.support-card:hover .support-card-more { letter-spacing: 0.14em; }
+
+    /* ========== 詳細サポートセクション ========== */
+    .support-detail { padding: 6rem 5%; }
+    .support-detail:nth-of-type(odd) { background: var(--white); }
+    .support-detail:nth-of-type(even) { background: var(--navy); }
+
+    .worry-box {
+      background: var(--off-white);
+      border-left: 4px solid var(--gold);
+      border-radius: 0 6px 6px 0;
+      padding: 2rem 2rem 1.5rem;
+      margin-bottom: 3rem;
+    }
+
+    .worry-box.dark {
+      background: rgba(255,255,255,0.06);
+      border-left-color: var(--gold);
+    }
+
+    .worry-title {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--navy);
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .worry-title.light { color: #fff; }
+
+    .worry-title::before {
+      content: '?';
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 24px;
+      height: 24px;
+      background: var(--gold);
+      color: var(--navy);
+      border-radius: 50%;
+      font-size: 0.85rem;
+      font-weight: 800;
+      flex-shrink: 0;
+    }
+
+    .worry-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+    }
+
+    .worry-list li {
+      font-size: 0.93rem;
+      color: var(--text);
+      padding-left: 1.4rem;
+      position: relative;
+      line-height: 1.6;
+    }
+
+    .worry-list.light li { color: rgba(255,255,255,0.8); }
+
+    .worry-list li::before {
+      content: '…';
+      position: absolute;
+      left: 0;
+      color: var(--gold);
+      font-weight: 700;
+    }
+
+    .detail-items {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.2rem;
+      margin-top: 2rem;
+    }
+
+    .detail-item {
+      background: var(--off-white);
+      border-radius: 6px;
+      padding: 1.4rem 1.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .detail-item.dark-card {
+      background: rgba(255,255,255,0.07);
+    }
+
+    .detail-item-num {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--gold);
+    }
+
+    .detail-item-title {
+      font-size: 0.97rem;
+      font-weight: 700;
+      color: var(--navy);
+    }
+
+    .detail-item-title.light { color: #fff; }
+
+    .detail-item-desc {
+      font-size: 0.85rem;
+      color: #4a5568;
+      line-height: 1.7;
+    }
+
+    .detail-item-desc.light { color: rgba(255,255,255,0.65); }
+
+    @media (max-width: 600px) {
+      .detail-items { grid-template-columns: 1fr; }
     }
 
     .support-card-list li::before {
@@ -905,13 +1090,17 @@
 
 <!-- Mobile Nav -->
 <nav class="mobile-nav" id="mobileNav">
-  <a href="#greeting"   onclick="closeMenu()">ご挨拶</a>
-  <a href="#service"    onclick="closeMenu()">サービス</a>
-  <a href="#support"    onclick="closeMenu()">サポート内容</a>
-  <a href="#flow"       onclick="closeMenu()">ご利用の流れ</a>
-  <a href="#expedition" onclick="closeMenu()">海外遠征</a>
-  <a href="#overview"   onclick="closeMenu()">サービス概要</a>
-  <a href="#contact" class="mobile-cta" onclick="closeMenu()">お問い合わせ</a>
+  <div class="mobile-nav-links">
+    <a href="#greeting"   class="menu-item" onclick="closeMenu()">Greeting</a>
+    <a href="#service"    class="menu-item" onclick="closeMenu()">Service</a>
+    <a href="#support"    class="menu-item" onclick="closeMenu()">Support</a>
+    <a href="#flow"       class="menu-item" onclick="closeMenu()">Process</a>
+    <a href="#expedition" class="menu-item" onclick="closeMenu()">Expedition</a>
+    <a href="#overview"   class="menu-item" onclick="closeMenu()">Overview</a>
+  </div>
+  <div class="mobile-nav-bottom">
+    <a href="#contact" class="mobile-cta" onclick="closeMenu()">Contact — お問い合わせ</a>
+  </div>
 </nav>
 
 <!-- ========== HERO ========== -->
@@ -996,7 +1185,7 @@
     <div class="support-grid">
 
       <!-- ① 渡航前サポート -->
-      <div class="support-card reveal">
+      <a href="#support-pre" class="support-card reveal" style="text-decoration:none;color:inherit;display:block;">
         <img src="images/support_visa.jpg" alt="VISA・パスポート" class="support-card-img">
         <div class="support-card-body">
           <div class="support-card-num">Support 01</div>
@@ -1007,11 +1196,12 @@
             <li>現地到着時のお出迎え対応</li>
             <li>渡航に必要な各種手続きのアドバイス</li>
           </ul>
+          <div class="support-card-more">詳しく見る →</div>
         </div>
-      </div>
+      </a>
 
       <!-- ② トライアウトサポート -->
-      <div class="support-card reveal reveal-delay-1">
+      <a href="#support-tryout" class="support-card reveal reveal-delay-1" style="text-decoration:none;color:inherit;display:block;">
         <img src="images/tryout_germany.jpg" alt="トライアウト" class="support-card-img">
         <div class="support-card-body">
           <div class="support-card-num">Support 02</div>
@@ -1022,11 +1212,12 @@
             <li>コンディション管理・メンタルサポート</li>
             <li>契約交渉および契約後のフォロー</li>
           </ul>
+          <div class="support-card-more">詳しく見る →</div>
         </div>
-      </div>
+      </a>
 
       <!-- ③ 現地生活サポート -->
-      <div class="support-card reveal reveal-delay-2">
+      <a href="#support-life" class="support-card reveal reveal-delay-2" style="text-decoration:none;color:inherit;display:block;">
         <img src="images/life_clubhouse.jpg" alt="現地生活サポート" class="support-card-img">
         <div class="support-card-body">
           <div class="support-card-num">Support 03</div>
@@ -1037,9 +1228,157 @@
             <li>電気・水道など生活インフラのサポート</li>
             <li>日常生活での困りごとへの対応</li>
           </ul>
+          <div class="support-card-more">詳しく見る →</div>
+        </div>
+      </a>
+
+    </div>
+  </div>
+</section>
+
+<!-- ========== 渡航前サポート 詳細 ========== -->
+<section id="support-pre" class="support-detail">
+  <div class="container">
+    <div class="two-col">
+      <div class="col-image reveal">
+        <img src="images/support_passport.jpg" alt="渡航前サポート">
+      </div>
+      <div class="col-text reveal reveal-delay-2">
+        <span class="section-label">Support 01</span>
+        <div class="divider"></div>
+        <h2 class="section-title-ja">渡航前サポート</h2>
+
+        <div class="worry-box">
+          <div class="worry-title">このようなお悩みはありませんか？</div>
+          <ul class="worry-list">
+            <li>VISAや書類の準備が複雑でどこから手をつければいいかわからない</li>
+            <li>語学力が不安で現地でコミュニケーションが取れるか心配</li>
+            <li>初めての海外で、到着後の動き方がまったくイメージできない</li>
+            <li>何をいつまでに準備すればいいかわからない</li>
+          </ul>
+        </div>
+
+        <div class="detail-items">
+          <div class="detail-item">
+            <div class="detail-item-num">01</div>
+            <div class="detail-item-title">VISA・書類サポート</div>
+            <div class="detail-item-desc">必要な書類の種類・取得方法・提出先まで、一つひとつ丁寧にご説明します。</div>
+          </div>
+          <div class="detail-item">
+            <div class="detail-item-num">02</div>
+            <div class="detail-item-title">語学学習サポート</div>
+            <div class="detail-item-desc">希望者にはドイツ語・英語の基礎学習をサポート。現地でも困らない準備を整えます。</div>
+          </div>
+          <div class="detail-item">
+            <div class="detail-item-num">03</div>
+            <div class="detail-item-title">現地お出迎え</div>
+            <div class="detail-item-desc">到着後は空港までお出迎え。見知らぬ土地でも安心してスタートを切れます。</div>
+          </div>
+          <div class="detail-item">
+            <div class="detail-item-num">04</div>
+            <div class="detail-item-title">渡航準備アドバイス</div>
+            <div class="detail-item-desc">持ち物・保険・連絡手段など、渡航前に知っておくべきことを網羅的にアドバイスします。</div>
+          </div>
         </div>
       </div>
+    </div>
+  </div>
+</section>
 
+<!-- ========== トライアウトサポート 詳細 ========== -->
+<section id="support-tryout" class="support-detail" style="background:var(--navy);">
+  <div class="container">
+    <div class="two-col reverse">
+      <div class="col-image reveal">
+        <img src="images/team_handshake.png" alt="トライアウトサポート">
+      </div>
+      <div class="col-text reveal reveal-delay-2">
+        <span class="section-label">Support 02</span>
+        <div class="divider"></div>
+        <h2 class="section-title-ja" style="color:#fff;">トライアウトサポート</h2>
+
+        <div class="worry-box dark">
+          <div class="worry-title light">このようなお悩みはありませんか？</div>
+          <ul class="worry-list light">
+            <li>どのチームが自分のレベルや希望に合っているかわからない</li>
+            <li>長旅の疲れで本番にベストコンディションで臨めるか不安</li>
+            <li>ドイツ語での契約交渉なんて自分にはとても無理…</li>
+            <li>トライアウト後のチームとのやり取りをどう進めればいいかわからない</li>
+          </ul>
+        </div>
+
+        <div class="detail-items">
+          <div class="detail-item dark-card">
+            <div class="detail-item-num">01</div>
+            <div class="detail-item-title light">チーム選定サポート</div>
+            <div class="detail-item-desc light">選手の実力・ポジション・年齢・希望を踏まえ、最適なクラブチームを選定します。</div>
+          </div>
+          <div class="detail-item dark-card">
+            <div class="detail-item-num">02</div>
+            <div class="detail-item-title light">現地トレーニング調整</div>
+            <div class="detail-item-desc light">渡航後の体調・時差・環境に合わせてトレーニング内容を調整。本番に照準を合わせます。</div>
+          </div>
+          <div class="detail-item dark-card">
+            <div class="detail-item-num">03</div>
+            <div class="detail-item-title light">コンディション管理</div>
+            <div class="detail-item-desc light">食事・睡眠・メンタルまでトータルにサポートし、最高のパフォーマンスを引き出します。</div>
+          </div>
+          <div class="detail-item dark-card">
+            <div class="detail-item-num">04</div>
+            <div class="detail-item-title light">契約交渉・契約後サポート</div>
+            <div class="detail-item-desc light">合格後の契約交渉から締結・入団手続きまで、言葉の壁を越えて全面的にサポートします。</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== 現地生活サポート 詳細 ========== -->
+<section id="support-life" class="support-detail">
+  <div class="container">
+    <div class="two-col">
+      <div class="col-image reveal">
+        <img src="images/life_housing.png" alt="現地生活サポート">
+      </div>
+      <div class="col-text reveal reveal-delay-2">
+        <span class="section-label">Support 03</span>
+        <div class="divider"></div>
+        <h2 class="section-title-ja">現地生活サポート</h2>
+
+        <div class="worry-box">
+          <div class="worry-title">このようなお悩みはありませんか？</div>
+          <ul class="worry-list">
+            <li>食事はどうすればいい？スーパーはどこ？何を買えばいい？</li>
+            <li>バスや電車など交通機関の使い方がまったくわからない</li>
+            <li>電気・ガス・ネットなど生活インフラの手続きが言葉の壁でできない</li>
+            <li>困ったことが起きたとき、誰に頼ればいいかわからない</li>
+          </ul>
+        </div>
+
+        <div class="detail-items">
+          <div class="detail-item">
+            <div class="detail-item-num">01</div>
+            <div class="detail-item-title">食事・スーパーアドバイス</div>
+            <div class="detail-item-desc">地元のスーパーの場所や使い方、食材の選び方、体づくりに適した食事をアドバイスします。</div>
+          </div>
+          <div class="detail-item">
+            <div class="detail-item-num">02</div>
+            <div class="detail-item-title">移動・交通サポート</div>
+            <div class="detail-item-desc">バス・電車・自転車など現地の移動手段を案内。練習場や試合会場への移動もサポートします。</div>
+          </div>
+          <div class="detail-item">
+            <div class="detail-item-num">03</div>
+            <div class="detail-item-title">生活インフラサポート</div>
+            <div class="detail-item-desc">電気・水道・インターネットなどの契約・手続きを代行・同行サポートします。</div>
+          </div>
+          <div class="detail-item">
+            <div class="detail-item-num">04</div>
+            <div class="detail-item-title">日常トラブル対応</div>
+            <div class="detail-item-desc">生活上の困りごとやトラブルがあれば随時対応。異国の地でも安心して生活できる環境を整えます。</div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </section>
