@@ -338,6 +338,60 @@
       line-height: 1.8;
     }
 
+    .hero-circles {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      margin-bottom: 2.5rem;
+    }
+
+    .hero-circle {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      width: 110px;
+      height: 110px;
+      border-radius: 50%;
+      border: 2px solid rgba(255,255,255,0.35);
+      background: rgba(255,255,255,0.07);
+      backdrop-filter: blur(4px);
+      text-decoration: none;
+      color: #fff;
+      gap: 6px;
+      transition: background 0.25s, border-color 0.25s, transform 0.25s;
+      cursor: pointer;
+    }
+
+    .hero-circle:hover {
+      background: rgba(200,169,81,0.25);
+      border-color: var(--gold);
+      transform: translateY(-4px);
+    }
+
+    .hero-circle-en {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.6rem;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--gold);
+    }
+
+    .hero-circle-ja {
+      font-size: 0.88rem;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      line-height: 1.3;
+      text-align: center;
+    }
+
+    @media (max-width: 600px) {
+      .hero-circles { gap: 1rem; }
+      .hero-circle { width: 88px; height: 88px; }
+      .hero-circle-ja { font-size: 0.75rem; }
+    }
+
     .hero-btn {
       display: inline-block;
       font-family: 'Barlow Condensed', sans-serif;
@@ -1114,6 +1168,22 @@
       夢のドイツサッカーへ、ともに踏み出す一歩。<br>
       渡航準備からトライアウト、現地生活まで完全サポート。
     </p>
+
+    <div class="hero-circles">
+      <a href="#support" class="hero-circle">
+        <span class="hero-circle-en">Long Stay</span>
+        <span class="hero-circle-ja">長期<br>留学</span>
+      </a>
+      <a href="#support" class="hero-circle">
+        <span class="hero-circle-en">Short Stay</span>
+        <span class="hero-circle-ja">短期<br>留学</span>
+      </a>
+      <a href="#expedition" class="hero-circle">
+        <span class="hero-circle-en">Int'l Cup</span>
+        <span class="hero-circle-ja">国際<br>カップ</span>
+      </a>
+    </div>
+
     <a href="#contact" class="hero-btn">無料相談はこちら</a>
   </div>
   <div class="hero-scroll">Scroll</div>
